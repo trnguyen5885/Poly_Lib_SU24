@@ -22,6 +22,11 @@ public class NguoiDung {
         this.matkhau = matkhau;
     }
 
+    public NguoiDung(String tendangnhap, String matkhau) {
+        this.tendangnhap = tendangnhap;
+        this.matkhau = matkhau;
+    }
+
     public int getManguoidung() {
         return manguoidung;
     }
