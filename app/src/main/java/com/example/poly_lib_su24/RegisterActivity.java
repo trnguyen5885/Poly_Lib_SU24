@@ -42,15 +42,28 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String tendangnhap = txtDangNhap.getText().toString();
-                String matkhau = txtXacNhanMatKhau.getText().toString();
-                NguoiDung nguoiDung = new NguoiDung(tendangnhap, matkhau);
-                boolean check = nguoiDungDAO.DangKyNguoiDung(nguoiDung);
+                String matkhau = txtMatKhau.getText().toString();
+                String xacnhanmatkhau = txtXacNhanMatKhau.getText().toString();
 
-                if(check) {
-                    Toast.makeText(RegisterActivity.this,"Đăng kí thành công", Toast.LENGTH_SHORT).show();
-                    finish();
+                if(xacnhanmatkhau.equals(matkhau)) {
+                    NguoiDung nguoiDung = new NguoiDung(tendangnhap, xacnhanmatkhau);
+                    boolean check = nguoiDungDAO.DangKyNguoiDung(nguoiDung);
+
+                    if(check) {
+                        Toast.makeText(RegisterActivity.this,"Đăng kí thành công", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Đăng kí không thành công", Toast.LENGTH_SHORT).show();
+                    txtDangNhap.setText("");
+                    txtMatKhau.setText("");
+                    txtXacNhanMatKhau.setText("");
+                    txtDangNhap.requestFocus();
 
                 }
+
+
+
             }
         });
 
