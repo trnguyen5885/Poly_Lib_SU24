@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.poly_lib_su24.adapter.BookTypeAdapter;
-import com.example.poly_lib_su24.dao.BookTypeDAO;
+import com.example.poly_lib_su24.DAO.BookTypeDAO;
 import com.example.poly_lib_su24.model.BookType;
 
 import java.util.ArrayList;

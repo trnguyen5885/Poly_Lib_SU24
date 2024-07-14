@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.poly_lib_su24.adapter.BookAdapter;
-import com.example.poly_lib_su24.dao.BooksDAO;
+import com.example.poly_lib_su24.DAO.BooksDAO;
 import com.example.poly_lib_su24.model.Books;
 import com.google.android.material.navigation.NavigationView;
 
