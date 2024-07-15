@@ -27,19 +27,20 @@ public class BooksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_customer);
+        setContentView(R.layout.activity_books);
 
         drawerLayout = findViewById(R.id.drawerLayout);
         toolbar = findViewById(R.id.toolBarCustom);
         navigationView = findViewById(R.id.navigationView);
         rvCustomers = findViewById(R.id.recyclerView);
 
+        booksDAO = new BooksDAO(BooksActivity.this);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.logo);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.logotoolbar);
+        getSupportActionBar().setTitle("Quản Lí Sách");
 
-        booksDAO = new BooksDAO(BooksActivity.this);
-        booksDAO.addBook(new Books("Tim Hieu Trai Tim", "Kien Thuc", "50.000"));
 
         listBooks = booksDAO.getAllBooks();
         BookAdapter adapter = new BookAdapter(BooksActivity.this, listBooks);

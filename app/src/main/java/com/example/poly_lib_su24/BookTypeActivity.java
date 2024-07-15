@@ -27,13 +27,11 @@ public class BookTypeActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolBar);
         rv = findViewById(R.id.rvBookType);
 
+        bookTypeDAO = new BookTypeDAO(BookTypeActivity.this);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Quản Lí Loại Sách");
-
-
-        bookTypeDAO = new BookTypeDAO(BookTypeActivity.this);
-        bookTypeDAO.addBook(new BookType("Kiến Thức"));
 
         doDuLieu();
 

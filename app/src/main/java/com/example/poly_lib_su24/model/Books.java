@@ -1,53 +1,51 @@
 package com.example.poly_lib_su24.model;
 
 public class Books {
-    String bookTitle;
-    int id;
-    String price;
-    String type;
+    int maSach;
+    String tenSach;
+    int giaSach;
+    int maLoai;
     int img;
-    public Books(int id, String bookTitle, String type, String price){
-        this.id = id;
-        this.bookTitle = bookTitle;
-        this.type = type;
-        this.price = price;
+    public Books(int maSach, String tenSach, int giaSach, int maLoai){
+        this.maSach = maSach;
+        this.tenSach = tenSach;
+        this.giaSach = giaSach;
+        this.maLoai = maLoai;
     }
-    public Books(String bookTitle, String type, String price){
-        this.bookTitle = bookTitle;
-        this.type = type;
-        this.price = price;
-    }
-
-    public int getId() {
-        return id;
+    public Books(String tenSach, int giaSach, int maLoai){
+        this.tenSach = tenSach;
+        this.giaSach = giaSach;
+        this.maLoai = maLoai;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getMaLoai() {
+        return maLoai;
+    }
+    public void setMaLoai(int maLoai) {
+        this.maLoai = maLoai;
     }
 
-    public String getBookTitle() {
-        return bookTitle;
+    public String getTenSach() {
+        return tenSach;
     }
 
-    public String getPrice() {
-        return price;
+    public void setTenSach(String tenSach) {
+        this.tenSach = tenSach;
     }
 
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
+    public int getGiaSach() {
+        return giaSach;
     }
 
-    public String getType() {
-        return type;
+    public void setGiaSach(int giaSach) {
+        this.giaSach = giaSach;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public int getMaSach() {
+        return maSach;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setMaSach(int maSach) {
+        this.maSach = maSach;
     }
-
 }

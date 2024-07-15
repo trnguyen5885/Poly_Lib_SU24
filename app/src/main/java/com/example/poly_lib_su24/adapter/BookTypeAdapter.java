@@ -32,12 +32,12 @@ public class BookTypeAdapter extends RecyclerView.Adapter<BookTypeViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull BookTypeViewHolder holder, int position) {
         BookType bookType = list.get(position);
-        holder.txtID.setText(bookType.getId()+"");
-        holder.txtName.setText(bookType.getName());
+        holder.txtID.setText(bookType.getMaLoai()+"");
+        holder.txtName.setText(bookType.getTenLoaiSach());
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int id = bookType.getId();
+                int id = bookType.getMaLoai();
                 ((BookTypeActivity)context).delete(id);
             }
         });

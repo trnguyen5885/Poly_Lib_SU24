@@ -32,10 +32,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Books books = listBook.get(position);
-        holder.txtID.setText(books.getId()+"");
-        holder.txtBookTitle.setText(books.getBookTitle());
-        holder.txtType.setText(books.getType());
-        holder.txtPrice.setText(books.getPrice());
+        holder.txtID.setText(books.getMaSach()+"");
+        holder.txtBookTitle.setText(books.getTenSach());
+        holder.txtType.setText(books.getMaLoai()+"");
+        holder.txtPrice.setText(books.getGiaSach()+"");
     }
 
     @Override
