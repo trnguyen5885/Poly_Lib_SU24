@@ -2,6 +2,7 @@ package com.example.poly_lib_su24.viewholder;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import com.example.poly_lib_su24.R;
 public class BookTypeViewHolder extends RecyclerView.ViewHolder {
     public TextView txtID,txtName;
     public Button btnDelete, btnEdit;
+    public ImageView imgLoaiSach;
 
     public BookTypeViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -19,5 +21,6 @@ public class BookTypeViewHolder extends RecyclerView.ViewHolder {
         this.txtName = itemView.findViewById(R.id.txtNameBookType);
         this.btnDelete = itemView.findViewById(R.id.btnDelete);
         this.btnEdit = itemView.findViewById(R.id.btnEdit);
+        this.imgLoaiSach = itemView.findViewById(R.id.imgLoaiSach);
     }
 }

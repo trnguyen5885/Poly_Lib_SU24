@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DpHelper extends SQLiteOpenHelper {
     public DpHelper(@Nullable Context context) {
-        super(context, "QUANLYTHUVIEN", null, 1);
+        super(context, "QUANLYTHUVIEN", null, 3);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class DpHelper extends SQLiteOpenHelper {
 //                tenloaisach text
 //        )
 
-        String sqlLoaiSach = "CREATE TABLE LOAISACH ( maloai integer primary key autoincrement, tenloaisach text)";
+        String sqlLoaiSach = "CREATE TABLE LOAISACH ( maloai integer primary key autoincrement, tenloaisach text, img text)";
         db.execSQL(sqlLoaiSach);
 
 //        Tạo bảng sách
@@ -31,7 +31,7 @@ public class DpHelper extends SQLiteOpenHelper {
 //
 //        )
 
-        String sqlSach = " CREATE TABLE SACH(masach integer primary key autoincrement , tensach text, giasach integer, maloai integer references LOAISACH(maloai))";
+        String sqlSach = " CREATE TABLE SACH(masach integer primary key autoincrement , tensach text, giasach integer, maloai integer references LOAISACH(maloai), img text)";
         db.execSQL(sqlSach);
 
 //        Tạo bảng người dùng
@@ -80,8 +80,8 @@ public class DpHelper extends SQLiteOpenHelper {
         db.execSQL(sqlThanhVien);
 
 //        Data mẫu
-        db.execSQL("INSERT INTO LOAISACH VALUES (1, 'Kiến thức'), (2, 'Kỹ năng'), (3, 'Tiểu Thuyết'), (4,'Giải Trí')");
-        db.execSQL("INSERT INTO SACH VALUES (1, 'Hiểu về trái tim', 35000, 1), (2, 'Kỹ năng thuyết trình', 25000, 2), (3, 'Hai Vạn Năm', 28000, 3), (4, 'Nắng xuân', 19000, 4)");
+        db.execSQL("INSERT INTO LOAISACH VALUES (1, 'Kiến thức','https://res.cloudinary.com/namnn512/image/upload/v1721122941/r2vedgox1ag2ohrfesez.jpg'), (2, 'Kỹ năng','https://res.cloudinary.com/namnn512/image/upload/v1721129837/hscysntrnuiqgp2kv2hg.jpg'), (3, 'Tiểu Thuyết','https://res.cloudinary.com/namnn512/image/upload/v1721129790/ctbrgmh1tuxjp47rnnqs.jpg'), (4,'Giải Trí','https://res.cloudinary.com/namnn512/image/upload/v1721127973/xthvvboqdrwv4ljnb42m.jpg')");
+        db.execSQL("INSERT INTO SACH VALUES (1, 'Hiểu về trái tim', 35000, 1,''), (2, 'Kỹ năng thuyết trình', 25000, 2,''), (3, 'Hai Vạn Năm', 28000, 3,''), (4, 'Nắng xuân', 19000, 4,'')");
         db.execSQL("INSERT INTO NGUOIDUNG VALUES (1,'Nguyễn Trần Trung Nguyên','trungnguyenk4','5885',1), (2,'Nguyễn Nhật Nam','nhatnamk5','123',2)");
         db.execSQL("INSERT INTO PHIEUMUON VALUES (1, 35000, '01-03-2024',2)");
         db.execSQL("INSERT INTO CTPM VALUES (1,1,1)");

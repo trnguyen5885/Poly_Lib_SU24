@@ -28,6 +28,23 @@
         android:layout_height="wrap_content"
         android:hint="Tên Loại Sách"
         android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HÌNH ẢNH"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <ImageView
+            android:id="@+id/imgLoaiSach"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/baseline_image_24"/>
+        <TextView
+            android:id="@+id/txtTrangThai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
     <LinearLayout
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"

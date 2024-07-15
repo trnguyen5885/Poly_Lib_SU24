@@ -12,10 +12,11 @@
         android:orientation="horizontal"
         android:padding="5dp">
         <ImageView
+            android:id="@+id/imgLoaiSach"
             android:layout_width="54dp"
             android:layout_height="54dp"
             android:layout_margin="5dp"
-            android:src="@drawable/imgtest"/>
+            android:src="@drawable/kienthuc"/>
         <LinearLayout
             android:layout_width="200dp"
             android:layout_height="match_parent"

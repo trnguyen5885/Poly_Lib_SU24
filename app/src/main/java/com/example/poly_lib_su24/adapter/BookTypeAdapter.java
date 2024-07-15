@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.poly_lib_su24.BookTypeActivity;
 import com.example.poly_lib_su24.R;
 import com.example.poly_lib_su24.model.BookType;
@@ -41,6 +42,9 @@ public class BookTypeAdapter extends RecyclerView.Adapter<BookTypeViewHolder> {
                 ((BookTypeActivity)context).delete(id);
             }
         });
+        if(!list.get(position).getImg().equals("")){
+            Glide.with(context).load(list.get(position).getImg()).into(holder.imgLoaiSach);
+        }
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +52,7 @@ public class BookTypeAdapter extends RecyclerView.Adapter<BookTypeViewHolder> {
                 ((BookTypeActivity)context).suaTenLoaiSach(bookType);
             }
         });
+        // xu ly  hinh anh
     }
 
     @Override

@@ -15,22 +15,26 @@ public class BookTypeDAO {
     public BookTypeDAO(Context context){
         helper =  new DpHelper(context);
     }
-    public void addBook(BookType bookType){
+    public boolean addBook(BookType bookType){
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("tenloaisach", bookType.getTenLoaiSach());
-        db.insert("loaisach",  null, values);
+        values.put("img", bookType.getImg());
+        long check = db.insert("loaisach",  null, values);
+        if(check == -1) return false;
+        return true;
     }
     public ArrayList<BookType> getAllBookType(){
         ArrayList<BookType> list = new ArrayList<>();
         SQLiteDatabase db = helper.getReadableDatabase();
         // cursor con tro de chi du lieu
         Cursor c = db.rawQuery("select * from loaisach", null);
-        if(c.moveToNext()){
+        if(c.moveToFirst()){
             do{
                 int maLoai = c.getInt(0);
                 String tenLoaiSach = c.getString(1);
-                BookType bookType = new BookType(maLoai, tenLoaiSach);
+                String img = c.getString(2);
+                BookType bookType = new BookType(maLoai, tenLoaiSach, img);
                 list.add(bookType);
             }
             while (c.moveToNext());
