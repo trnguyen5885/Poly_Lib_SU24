@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 boolean kiemTraDangNhap = nguoiDungDAO.KiemTraDangNhap(tendangnhap, matkhau);
 
                 if(kiemTraDangNhap) {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(LoginActivity.this, "Tên đăng nhập hoặc mật khẩu sai", Toast.LENGTH_SHORT).show();
