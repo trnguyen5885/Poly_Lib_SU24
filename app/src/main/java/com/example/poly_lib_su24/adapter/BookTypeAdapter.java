@@ -41,6 +41,13 @@ public class BookTypeAdapter extends RecyclerView.Adapter<BookTypeViewHolder> {
                 ((BookTypeActivity)context).delete(id);
             }
         });
+        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BookType bookType = list.get(position);
+                ((BookTypeActivity)context).suaTenLoaiSach(bookType);
+            }
+        });
     }
 
     @Override

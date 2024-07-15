@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.poly_lib_su24.database.DbHelper;
 import com.example.poly_lib_su24.database.DpHelper;
 import com.example.poly_lib_su24.model.BookType;
 
@@ -41,5 +40,11 @@ public class BookTypeDAO {
     public void delete(int maLoai){
         SQLiteDatabase db = helper.getWritableDatabase();
         db.delete("loaisach", "maloai=?", new String[]{maLoai+""});
+    }
+    public void edit(BookType bookType){
+        SQLiteDatabase db =  helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("tenloaisach", bookType.getTenLoaiSach());
+        db.update("LOAISACH", values, "maloai=?", new String[]{bookType.getMaLoai()+""});
     }
 }
