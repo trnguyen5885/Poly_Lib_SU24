@@ -20,7 +20,7 @@
             android:exported="false"
             android:parentActivityName=".AdminActivity"/>
         <activity
-            android:name=".BooksActivity"
+            android:name=".AdminActivity"
             android:exported="false" />
         <activity
             android:name=".adapter.BookAdapter"
@@ -29,7 +29,7 @@
             android:name=".Profile"
             android:exported="false" />
         <activity
-            android:name=".BookTypeActivity"
+            android:name=".BooksActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
@@ -38,7 +38,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminActivity"
+            android:name=".BookTypeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

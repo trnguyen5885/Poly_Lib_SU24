@@ -50,7 +50,6 @@ import java.util.Map;
 
 
 public class BookTypeActivity extends AppCompatActivity {
-    Dialog currentDialog;
     RecyclerView rv;
     ArrayList<BookType> list = new ArrayList<>();
     BookTypeDAO bookTypeDAO;

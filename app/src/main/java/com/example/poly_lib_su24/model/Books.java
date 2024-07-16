@@ -5,17 +5,21 @@ public class Books {
     String tenSach;
     int giaSach;
     int maLoai;
-    int img;
-    public Books(int maSach, String tenSach, int giaSach, int maLoai){
+    String img;
+    String tenLoaiSach;
+    public Books(int maSach, String tenSach, int giaSach, int maLoai, String tenLoaiSach, String img){
         this.maSach = maSach;
         this.tenSach = tenSach;
         this.giaSach = giaSach;
         this.maLoai = maLoai;
+        this.tenLoaiSach = tenLoaiSach;
+        this.img = img;
     }
-    public Books(String tenSach, int giaSach, int maLoai){
+    public Books(String tenSach, int giaSach, int maLoai, String img){
         this.tenSach = tenSach;
         this.giaSach = giaSach;
         this.maLoai = maLoai;
+        this.img = img;
     }
 
     public int getMaLoai() {
@@ -47,5 +51,21 @@ public class Books {
 
     public void setMaSach(int maSach) {
         this.maSach = maSach;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getTenLoaiSach() {
+        return tenLoaiSach;
+    }
+
+    public void setTenLoaiSach(String tenLoaiSach) {
+        this.tenLoaiSach = tenLoaiSach;
     }
 }

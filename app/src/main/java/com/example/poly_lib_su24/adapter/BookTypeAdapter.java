@@ -1,6 +1,7 @@
 package com.example.poly_lib_su24.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.poly_lib_su24.BookTypeActivity;
+import com.example.poly_lib_su24.BooksActivity;
 import com.example.poly_lib_su24.R;
 import com.example.poly_lib_su24.model.BookType;
 import com.example.poly_lib_su24.viewholder.BookTypeViewHolder;
@@ -42,6 +44,7 @@ public class BookTypeAdapter extends RecyclerView.Adapter<BookTypeViewHolder> {
                 ((BookTypeActivity)context).delete(id);
             }
         });
+        // xu ly  hinh anh
         if(!list.get(position).getImg().equals("")){
             Glide.with(context).load(list.get(position).getImg()).into(holder.imgLoaiSach);
         }
@@ -52,11 +55,22 @@ public class BookTypeAdapter extends RecyclerView.Adapter<BookTypeViewHolder> {
                 ((BookTypeActivity)context).suaTenLoaiSach(bookType);
             }
         });
-        // xu ly  hinh anh
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = bookType.getMaLoai();
+                String tenLoai = bookType.getTenLoaiSach();
+                Intent intent = new Intent(context, BooksActivity.class);
+                intent.putExtra("bookType", id);
+                intent.putExtra("tenLoai", tenLoai);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
+
 }

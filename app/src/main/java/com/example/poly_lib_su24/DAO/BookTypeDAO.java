@@ -51,4 +51,5 @@ public class BookTypeDAO {
         values.put("tenloaisach", bookType.getTenLoaiSach());
         db.update("LOAISACH", values, "maloai=?", new String[]{bookType.getMaLoai()+""});
     }
+
 }
