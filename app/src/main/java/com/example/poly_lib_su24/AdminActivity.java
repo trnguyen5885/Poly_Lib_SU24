@@ -2,12 +2,17 @@ package com.example.poly_lib_su24;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
@@ -17,6 +22,7 @@ public class AdminActivity extends AppCompatActivity {
     Toolbar toolbar;
     NavigationView navigationView;
     Button btnSach, btnThanhVien, btnPhieuMuon, btnThongKe;
+    ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,5 +51,28 @@ public class AdminActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.logotoolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,0, 0);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        toolbar.setNavigationOnClickListener(v -> {
+            if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                drawerLayout.closeDrawer(GravityCompat.START);
+            }
+            else {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+            } else {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

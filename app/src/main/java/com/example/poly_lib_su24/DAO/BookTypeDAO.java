@@ -34,7 +34,8 @@ public class BookTypeDAO {
                 int maLoai = c.getInt(0);
                 String tenLoaiSach = c.getString(1);
                 String img = c.getString(2);
-                BookType bookType = new BookType(maLoai, tenLoaiSach, img);
+                int xoa = c.getInt(3);
+                BookType bookType = new BookType(maLoai, tenLoaiSach, img, xoa);
                 list.add(bookType);
             }
             while (c.moveToNext());
@@ -43,7 +44,9 @@ public class BookTypeDAO {
     }
     public void delete(int maLoai){
         SQLiteDatabase db = helper.getWritableDatabase();
-        db.delete("loaisach", "maloai=?", new String[]{maLoai+""});
+        ContentValues values = new ContentValues();
+        values.put("xoa", 1);
+        db.update("loaisach", values,"maloai=?",  new String[]{maLoai+""});
     }
     public void edit(BookType bookType){
         SQLiteDatabase db =  helper.getWritableDatabase();

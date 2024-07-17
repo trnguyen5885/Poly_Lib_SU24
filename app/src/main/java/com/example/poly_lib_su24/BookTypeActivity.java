@@ -171,7 +171,7 @@ public class BookTypeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String tenTheLoaiSach = edtTenLoaiSach.getText().toString();
-                BookType bookTypeNew = new BookType(bookType.getMaLoai(), linkHinh);
+                BookType bookTypeNew = new BookType(bookType.getMaLoai(), tenTheLoaiSach,linkHinh);
                 bookTypeDAO.edit(bookTypeNew);
                 doDuLieu();
                 dialog.dismiss();
@@ -192,7 +192,7 @@ public class BookTypeActivity extends AppCompatActivity {
         builder.setTitle("Cảnh Báo");
         builder.setMessage("Bạn có muốn xóa thể loại này không?");
         builder.setCancelable(false);
-        AlertDialog dialog =  builder.create();
+
         builder.setNegativeButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -203,10 +203,11 @@ public class BookTypeActivity extends AppCompatActivity {
         builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
             }
         });
-        dialog.show();
+
+        AlertDialog adialog =  builder.create();
+        adialog.show();
     }
 
     // Cấp quyền truy cập bộ nhớ
@@ -267,13 +268,16 @@ public class BookTypeActivity extends AppCompatActivity {
     }
     HashMap<String, String> config = new HashMap<>();
     // Upload lên clound
-    private void configCloudinary() {
-        config.put("cloud_name", "namnn512");
-        config.put("api_key", "212612511337371");
-        config.put("api_secret", "_6OBeGuVwm9sAYbyW0u3lqMVYLE");
-        MediaManager.init(BookTypeActivity.this, config);
+    public void configCloudinary() {
+        try {
+            config.put("cloud_name", "namnn512");
+            config.put("api_key", "212612511337371");
+            config.put("api_secret", "_6OBeGuVwm9sAYbyW0u3lqMVYLE");
+            MediaManager.init(BookTypeActivity.this, config);
+        }catch (IllegalStateException e) {
+        }
     }
-    private void uploadToCloudinary(String filePath) {
+    public void uploadToCloudinary(String filePath) {
         Log.d("A", "sign up uploadToCloudinary- ");
         MediaManager.get().upload(filePath).callback(new UploadCallback() {
             @Override

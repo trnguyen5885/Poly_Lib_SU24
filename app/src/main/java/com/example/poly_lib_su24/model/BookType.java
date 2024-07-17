@@ -4,6 +4,7 @@ public class BookType {
     int maLoai;
     String tenLoaiSach;
     String img="";
+    int xoa;
     public BookType(int maLoai, String tenLoaiSach){
         this.maLoai = maLoai;
         this.tenLoaiSach = tenLoaiSach;
@@ -19,6 +20,12 @@ public class BookType {
         this.maLoai = maLoai;
         this.tenLoaiSach = tenLoaiSach;
         this.img = img;
+    }
+    public BookType(int maLoai, String tenLoaiSach, String img, int xoa){
+        this.maLoai = maLoai;
+        this.tenLoaiSach = tenLoaiSach;
+        this.img = img;
+        this.xoa = xoa;
     }
     public int getMaLoai() {
         return maLoai;
@@ -42,5 +49,13 @@ public class BookType {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public int getXoa() {
+        return xoa;
+    }
+
+    public void setXoa(int xoa) {
+        this.xoa = xoa;
     }
 }

@@ -39,7 +39,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Books books = listBook.get(position);
-        holder.txtID.setText("ID: " + books.getMaSach() + "");
+        holder.txtID.setText("Id: " + books.getMaSach() + "");
         holder.txtBookTitle.setText(books.getTenSach());
         holder.txtType.setText(books.getTenLoaiSach() + "");
         holder.txtPrice.setText(books.getGiaSach() + "");
@@ -61,6 +61,19 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
                 ((BooksActivity)context).suaSach(book);
             }
         });
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = books.getMaSach();
+                ((BooksActivity)context).deleteBook(id);
+            }
+        });
+        if(books.getXoaSach() == 0){
+            holder.itemView.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.itemView.setVisibility(View.GONE);
+        }
     }
 
     @Override

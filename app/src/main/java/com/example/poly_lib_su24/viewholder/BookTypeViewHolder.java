@@ -8,7 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.poly_lib_su24.R;
+import com.example.poly_lib_su24.model.BookType;
 
 public class BookTypeViewHolder extends RecyclerView.ViewHolder {
     public TextView txtID,txtName;
