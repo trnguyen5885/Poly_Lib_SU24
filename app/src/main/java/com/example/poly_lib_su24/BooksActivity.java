@@ -74,8 +74,8 @@ public class BooksActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.logotoolbar);
-        getSupportActionBar().setTitle("Quản Lí Sách");
+        String tenLoai = getIntent().getStringExtra("tenLoai");
+        getSupportActionBar().setTitle(tenLoai);
 
         doDuLieu();
 
