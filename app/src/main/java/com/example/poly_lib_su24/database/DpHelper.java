@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DpHelper extends SQLiteOpenHelper {
     public DpHelper(@Nullable Context context) {
-        super(context, "QUANLYTHUVIEN", null, 1);
+        super(context, "QUANLYTHUVIEN", null, 4);
     }
 
     @Override
@@ -52,13 +52,11 @@ public class DpHelper extends SQLiteOpenHelper {
 //        CREATE TABLE PHIEUMUON(
 //                maphieumuon integer primary key autoincrement ,
 //                giathue integer,
-//                tensach text,
 //                ngaymuon text,
 //                manguoidung integer references NGUOIDUNG(manguoidung)
-//                tennguoidung integer references NGUOIDUNG(tennguoidung)
 //        )
 
-        String sqlPhieuMuon = "CREATE TABLE PHIEUMUON(maphieumuon integer primary key autoincrement , giathue integer, ngaymuon text, manguoidung integer references NGUOIDUNG(manguoidung), masach integer references SACH(masach), trangthai integer)";
+        String sqlPhieuMuon = "CREATE TABLE PHIEUMUON(maphieumuon integer primary key autoincrement , giathue integer, ngaymuon text, manguoidung integer references NGUOIDUNG(manguoidung))";
         db.execSQL(sqlPhieuMuon);
 
 //        Tạo bảng chi tiết phiếu mượn
@@ -68,8 +66,8 @@ public class DpHelper extends SQLiteOpenHelper {
 //                masach integer references SACH(masach)
 //        )
 
-//        String sqlCTPM = "CREATE TABLE CTPM(mactpm integer primary key autoincrement, maphieumuon integer references PHIEUMUON(maphieumuon), masach integer references SACH(masach))";
-//        db.execSQL(sqlCTPM);
+        String sqlCTPM = "CREATE TABLE CTPM(mactpm integer primary key autoincrement, maphieumuon integer references PHIEUMUON(maphieumuon), masach integer references SACH(masach))";
+        db.execSQL(sqlCTPM);
 
 //        Tạo bảng thành viên
 //        CREATE TABLE THANHVIEN(
@@ -85,8 +83,8 @@ public class DpHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO LOAISACH VALUES (1, 'Kiến thức','https://res.cloudinary.com/namnn512/image/upload/v1721122941/r2vedgox1ag2ohrfesez.jpg',''), (2, 'Kỹ năng','https://res.cloudinary.com/namnn512/image/upload/v1721129837/hscysntrnuiqgp2kv2hg.jpg',''), (3, 'Tiểu Thuyết','https://res.cloudinary.com/namnn512/image/upload/v1721129790/ctbrgmh1tuxjp47rnnqs.jpg',''), (4,'Giải Trí','https://res.cloudinary.com/namnn512/image/upload/v1721127973/xthvvboqdrwv4ljnb42m.jpg','')");
         db.execSQL("INSERT INTO SACH VALUES (1, 'Hiểu về trái tim', 35000, 1,'',''), (2, 'Kỹ năng thuyết trình', 25000, 2,'',''), (3, 'Hai Vạn Năm', 28000, 3,'',''), (4, 'Nắng xuân', 19000, 4,'','')");
         db.execSQL("INSERT INTO NGUOIDUNG VALUES (1,'Nguyễn Trần Trung Nguyên','trungnguyenk4','5885',1), (2,'Nguyễn Nhật Nam','nhatnamk5','123',2)");
-        db.execSQL("INSERT INTO PHIEUMUON VALUES (1, 35000, '01-03-2024',2,1,0)");
-//        db.execSQL("INSERT INTO CTPM VALUES (1,1,1)");
+        db.execSQL("INSERT INTO PHIEUMUON VALUES (1, 35000, '01-03-2024',2)");
+        db.execSQL("INSERT INTO CTPM VALUES (1,1,1)");
         db.execSQL("INSERT INTO THANHVIEN VALUES (1,'Nguyễn Nhật Nam',2)");
     }
 
@@ -98,7 +96,7 @@ public class DpHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS SACH");
             db.execSQL("DROP TABLE IF EXISTS NGUOIDUNG");
             db.execSQL("DROP TABLE IF EXISTS PHIEUMUON");
-//            db.execSQL("DROP TABLE IF EXISTS CTPM");
+            db.execSQL("DROP TABLE IF EXISTS CTPM");
             db.execSQL("DROP TABLE IF EXISTS THANHVIEN");
             onCreate(db);
         }
