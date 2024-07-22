@@ -25,7 +25,15 @@
             android:parentActivityName=".AdminActivity" />
         <activity
             android:name=".WelcomeActivity"
-            android:exported="false" />
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".adapter.BookAdapter"
             android:exported="false" />
@@ -45,11 +53,7 @@
         <activity
             android:name=".AdminActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
