@@ -6,36 +6,42 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:layout_marginTop="24dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
     tools:context=".BooksActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolBarCustom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF"/>
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp">
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:queryHint="Search" />
+        </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="70dp"/>
+            android:layout_height="match_parent"
+            android:layout_marginTop="110dp">
+        </androidx.recyclerview.widget.RecyclerView>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fButton"
+        android:id="@+id/fButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_marginBottom="60dp"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="60dp"
         android:backgroundTint="#ED7D2D"
-        android:src="@drawable/baseline_add_32"/>
-</LinearLayout>
+        app:layout_anchor="@id/recyclerView"
+        app:layout_anchorGravity="bottom|end"
+        android:src="@drawable/baseline_add_32" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -21,17 +21,18 @@ import com.example.poly_lib_su24.model.Books;
 import com.example.poly_lib_su24.viewholder.BookViewHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
     Context context;
     ArrayList<Books> listBook;
-
+    ArrayList<Books> filteredListBook;
 
     public BookAdapter(Context context, ArrayList<Books> listBook) {
         this.context = context;
         this.listBook = listBook;
+        this.filteredListBook = new ArrayList<>(listBook);
     }
-
 
     @NonNull
     @Override
@@ -103,6 +104,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, listBook.size());
     }
+
     @Override
     public int getItemCount() {
         return listBook.size();

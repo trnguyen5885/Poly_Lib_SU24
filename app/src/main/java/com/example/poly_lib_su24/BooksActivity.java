@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +62,9 @@ public class BooksActivity extends AppCompatActivity {
     ImageView imgSach;
     TextView txtTrangThai;
     String linkHinh = "";
+    SearchView searchView;
+    ArrayList<Books> filteredBooks;
+
     private final int PERMISSION_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,7 @@ public class BooksActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolBarCustom);
         rvCustomers = findViewById(R.id.recyclerView);
         fButton = findViewById(R.id.fButton);
+        searchView = findViewById(R.id.searchView);
 
         booksDAO = new BooksDAO(BooksActivity.this);
 
@@ -85,7 +90,7 @@ public class BooksActivity extends AppCompatActivity {
         requestPermission();
         configCloudinary();
 
-        doDuLieu();
+        doDuLieu(null);
 
         fButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,23 +98,64 @@ public class BooksActivity extends AppCompatActivity {
                 dialogThemSach();
             }
         });
+        listBooks = new ArrayList<>();
+        filteredBooks = new ArrayList<>();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Xử lý khi người dùng nhấn nút tìm kiếm
+                // Thực hiện tìm kiếm với 'query'
+                doDuLieu(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Xử lý khi nội dung tìm kiếm thay đổi
+                // Cập nhật danh sách hiển thị theo 'newText'
+                doDuLieu(newText);
+                return false;
+            }
+        });
     }
-    public void doDuLieu(){
+    public void doDuLieu(String text){
         listBooks = booksDAO.getAllBooks();
-        ArrayList<Books> filteredBooks = new ArrayList<>();
+        filteredBooks = new ArrayList<>();
         // Lấy thể loại từ Intent
         int bookType = getIntent().getIntExtra("bookType", -1);// Default là -1 nếu không tìm thấy giá trị
         // Lọc sách theo thể loại
-        for(Books books : listBooks) {
-            if (books.getMaLoai() == bookType) {
-                filteredBooks.add(books);
+        if(bookType != -1) {
+            for (Books books : listBooks) {
+                if (books.getMaLoai() == bookType) {
+                    filteredBooks.add(books);
+                }
             }
+            adapter = new BookAdapter(BooksActivity.this, filteredBooks);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
+            rvCustomers.setLayoutManager(linearLayoutManager);
+            rvCustomers.setAdapter(adapter);
         }
-        adapter = new BookAdapter(BooksActivity.this, filteredBooks);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
-        rvCustomers.setLayoutManager(linearLayoutManager);
-        rvCustomers.setAdapter(adapter);
+        // tìm kiếm
+        else if(text!=null){
+            for (Books book : listBooks) {
+                if (book.getTenSach().toLowerCase().contains(text.toLowerCase())) {
+                    filteredBooks.add(book);
+                }
+            }
+            adapter = new BookAdapter(BooksActivity.this, filteredBooks);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
+            rvCustomers.setLayoutManager(linearLayoutManager);
+            rvCustomers.setAdapter(adapter);
+        }
+        else{
+            adapter = new BookAdapter(BooksActivity.this, listBooks);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
+            rvCustomers.setLayoutManager(linearLayoutManager);
+            rvCustomers.setAdapter(adapter);
+        }
+
     }
+
     public void dialogThemSach(){
         AlertDialog.Builder builder = new AlertDialog.Builder(BooksActivity.this);
         LayoutInflater inflater = getLayoutInflater();
@@ -152,7 +198,7 @@ public class BooksActivity extends AppCompatActivity {
                     boolean check = booksDAO.addBook(books);
                     if (check) {
                         Toast.makeText(BooksActivity.this, "Thêm loại sách thành công", Toast.LENGTH_SHORT).show();
-                        doDuLieu();
+                        doDuLieu(null);
                         dialog.dismiss();
                     } else {
                         Toast.makeText(BooksActivity.this, "Thêm loại sách thất bại", Toast.LENGTH_SHORT).show();
@@ -202,7 +248,7 @@ public class BooksActivity extends AppCompatActivity {
                 int giaSach = Integer.parseInt(edtGiaSach.getText().toString());
                 Books booksNew = new Books(books.getMaSach(), tenSach, giaSach, books.getMaLoai(),  books.getTenLoaiSach(), linkHinh);
                 booksDAO.edit(booksNew);
-                doDuLieu();
+                doDuLieu(null);
                 dialog.dismiss();
             }
         });

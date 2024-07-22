@@ -85,6 +85,10 @@ public class AdminActivity extends AppCompatActivity {
                         Intent intent = new Intent(AdminActivity.this, BookTypeActivity.class);
                         startActivity(intent);
                     }
+                    else if (item.getItemId() == R.id.sach){
+                        Intent intent = new Intent(AdminActivity.this, BooksActivity.class);
+                        startActivity(intent);
+                    }
                 return false;
             }
         });

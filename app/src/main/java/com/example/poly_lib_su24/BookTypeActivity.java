@@ -213,6 +213,8 @@ public class BookTypeActivity extends AppCompatActivity {
         adialog.show();
     }
 
+
+
     // Cấp quyền truy cập bộ nhớ
     private void requestPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
