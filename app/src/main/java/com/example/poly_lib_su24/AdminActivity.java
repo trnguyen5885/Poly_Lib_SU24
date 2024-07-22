@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +46,13 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        btnPhieuMuon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(AdminActivity.this,PhieuMuonActivity.class);
+                startActivity(i);
+            }
+        });
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -60,6 +68,16 @@ public class AdminActivity extends AppCompatActivity {
             }
             else {
                 drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    if (item.getItemId() == R.id.theLoai) {
+                        Intent intent = new Intent(AdminActivity.this, BookTypeActivity.class);
+                        startActivity(intent);
+                    }
+                return false;
             }
         });
     }

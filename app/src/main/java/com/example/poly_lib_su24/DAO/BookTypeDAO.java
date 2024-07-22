@@ -52,6 +52,7 @@ public class BookTypeDAO {
         SQLiteDatabase db =  helper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("tenloaisach", bookType.getTenLoaiSach());
+        values.put("img", bookType.getImg());
         db.update("LOAISACH", values, "maloai=?", new String[]{bookType.getMaLoai()+""});
     }
 

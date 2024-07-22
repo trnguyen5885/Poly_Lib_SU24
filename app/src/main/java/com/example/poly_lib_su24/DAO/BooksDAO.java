@@ -63,6 +63,7 @@ public class BooksDAO {
         ContentValues values = new ContentValues();
         values.put("tensach", books.getTenSach());
         values.put("giasach", books.getGiaSach());
+        values.put("img", books.getImg());
         db.update("sach", values, "masach=?", new String[]{books.getMaSach()+""});
     }
 }

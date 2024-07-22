@@ -1,7 +1,6 @@
 package com.example.poly_lib_su24;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,7 +22,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -64,10 +62,13 @@ public class BookTypeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_book_type);
+        setContentView(R.layout.activity_category);
         toolbar = findViewById(R.id.toolBar);
         rv = findViewById(R.id.rvBookType);
         fButton = findViewById(R.id.fButton);
+
+        int space = getResources().getDimensionPixelOffset(R.dimen.item_space);
+        rv.addItemDecoration(new SpaceItem(space));
 
         bookTypeDAO = new BookTypeDAO(BookTypeActivity.this);
         requestPermission();
@@ -150,9 +151,11 @@ public class BookTypeActivity extends AppCompatActivity {
 
         EditText edtTenLoaiSach = v.findViewById(R.id.edtTenLoaiSach);
         TextView title = v.findViewById(R.id.title);
-        ImageView imgLoaiSach = v.findViewById(R.id.imgLoaiSach);
+        imgLoaiSach = v.findViewById(R.id.imgLoaiSach);
+        txtTrangThai = v.findViewById(R.id.txtTrangThai);
 
         Glide.with(this).load(bookType.getImg()).into(imgLoaiSach);
+
         title.setText("Sửa Loại Sách");
         edtTenLoaiSach.setText(bookType.getTenLoaiSach());
         AlertDialog dialog = builder.create();
@@ -224,7 +227,6 @@ public class BookTypeActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Cấp quyền thành công", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
             }
@@ -275,6 +277,7 @@ public class BookTypeActivity extends AppCompatActivity {
             config.put("api_secret", "_6OBeGuVwm9sAYbyW0u3lqMVYLE");
             MediaManager.init(BookTypeActivity.this, config);
         }catch (IllegalStateException e) {
+
         }
     }
     public void uploadToCloudinary(String filePath) {

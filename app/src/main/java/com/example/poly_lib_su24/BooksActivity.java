@@ -55,6 +55,7 @@ public class BooksActivity extends AppCompatActivity {
     RecyclerView rvCustomers;
     ArrayList<Books> listBooks = new ArrayList<Books>();
     BooksDAO booksDAO;
+    BookAdapter adapter;
     FloatingActionButton fButton;
     String filePath="";
     ImageView imgSach;
@@ -77,6 +78,9 @@ public class BooksActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         String tenLoai = getIntent().getStringExtra("tenLoai");
         getSupportActionBar().setTitle(tenLoai);
+
+        int space = getResources().getDimensionPixelOffset(R.dimen.item_space);
+        rvCustomers.addItemDecoration(new SpaceItem(space));
 
         requestPermission();
         configCloudinary();
@@ -101,7 +105,7 @@ public class BooksActivity extends AppCompatActivity {
                 filteredBooks.add(books);
             }
         }
-        BookAdapter adapter = new BookAdapter(BooksActivity.this, filteredBooks);
+        adapter = new BookAdapter(BooksActivity.this, filteredBooks);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
         rvCustomers.setLayoutManager(linearLayoutManager);
         rvCustomers.setAdapter(adapter);
@@ -128,6 +132,12 @@ public class BooksActivity extends AppCompatActivity {
         txtMaLoai.setText(maLoai+"");
         txtTheLoai.setText(tenLoai);
 
+        imgSach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accessTheGallery();
+            }
+        });
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,12 +161,7 @@ public class BooksActivity extends AppCompatActivity {
 
             }
         });
-        imgSach.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                accessTheGallery();
-            }
-        });
+
         btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,7 +180,8 @@ public class BooksActivity extends AppCompatActivity {
         EditText edtGiaSach = v.findViewById(R.id.edtGiaSach);
         TextView txtTheLoai = v.findViewById(R.id.txtTheLoai);
         TextView title = v.findViewById(R.id.title);
-        ImageView imgSach = v.findViewById(R.id.imgSach);
+        imgSach = v.findViewById(R.id.imgSach);
+        txtTrangThai = v.findViewById(R.id.txtTrangThai);
 
         Glide.with(this).load(books.getImg()).into(imgSach);
 
@@ -215,7 +221,7 @@ public class BooksActivity extends AppCompatActivity {
         });
         dialog.show();
     }
-    public void deleteBook(int id){
+    public void deleteBook(int id, int position){
         AlertDialog.Builder builder = new AlertDialog.Builder(BooksActivity.this);
         builder.setTitle("Cảnh Báo");
         builder.setMessage("Bạn có muốn xóa thể loại này không?");
@@ -224,8 +230,7 @@ public class BooksActivity extends AppCompatActivity {
         builder.setNegativeButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                booksDAO.delete(id);
-                doDuLieu();
+                xoaKhoiDanhSach(id, position);
             }
         });
         builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
@@ -236,6 +241,18 @@ public class BooksActivity extends AppCompatActivity {
 
         AlertDialog adialog =  builder.create();
         adialog.show();
+    }
+    private void xoaKhoiDanhSach(int id, int position) {
+        // Xóa sách khỏi danh sách và cập nhật RecyclerView
+        for (int i = 0; i < listBooks.size(); i++) {
+            if (listBooks.get(i).getMaSach() == id) {
+                listBooks.remove(i);
+                adapter.removeItem(position);
+                adapter.notifyItemRemoved(position);
+                adapter.notifyItemRangeChanged(position, listBooks.size());
+                break;
+            }
+        }
     }
     private void requestPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -333,5 +350,4 @@ public class BooksActivity extends AppCompatActivity {
             }
         }).dispatch();
     }
-
 }

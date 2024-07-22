@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/dashboard"
-        android:title="Dashboard"
-        android:icon="@drawable/baseline_dashboard_24"/>
-    <item android:id="@+id/theLoai"
-        android:title="Quản lý thể loại sách"
-        android:icon="@drawable/baseline_menu_book_24"/>
+    <item
+        android:title="Trang Chủ">
+        <menu>
+            <item android:id="@+id/dashboard"
+                android:title="Dashboard"
+                android:icon="@drawable/baseline_dashboard_24"/>
+        </menu>
+    </item>
+    <item
+        android:title="Sách">
+        <menu>
+            <item android:id="@+id/theLoai"
+                android:title="Quản lý thể loại sách"
+                android:icon="@drawable/baseline_menu_book_24"/>
+            <item android:id="@+id/sach"
+                android:title="Quản lý sách"
+                android:icon="@drawable/baseline_menu_book_24"/>
+        </menu>
+    </item>
+    <item
+        android:title="Thống kê">
+        <menu>
     <item android:id="@+id/thanhVien"
         android:title="Quản lý thành viên"
         android:icon="@drawable/baseline_groups_24"/>
@@ -15,4 +31,6 @@
     <item android:id="@+id/thongKe"
         android:title="Thống kê"
         android:icon="@drawable/baseline_lock_open_24"/>
+        </menu>
+    </item>
 </menu>

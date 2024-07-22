@@ -22,5 +22,6 @@ public class BookViewHolder extends RecyclerView.ViewHolder {
         this.txtType = itemView.findViewById(R.id.txtBookType);
         this.btnEdit = itemView.findViewById(R.id.btnEdit);
         this.btnDelete = itemView.findViewById(R.id.btnDelete);
+        this.imgBook = itemView.findViewById(R.id.imgBook);
     }
 }
