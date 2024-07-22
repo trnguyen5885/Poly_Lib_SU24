@@ -46,6 +46,14 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        btnPhieuMuon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(AdminActivity.this,PhieuMuonActivity.class);
+                startActivity(i);
+            }
+        });
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.logotoolbar);

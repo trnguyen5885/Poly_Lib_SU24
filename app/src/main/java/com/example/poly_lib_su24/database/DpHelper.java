@@ -52,8 +52,10 @@ public class DpHelper extends SQLiteOpenHelper {
 //        CREATE TABLE PHIEUMUON(
 //                maphieumuon integer primary key autoincrement ,
 //                giathue integer,
+//                tensach text,
 //                ngaymuon text,
 //                manguoidung integer references NGUOIDUNG(manguoidung)
+//                tennguoidung integer references NGUOIDUNG(tennguoidung)
 //        )
 
         String sqlPhieuMuon = "CREATE TABLE PHIEUMUON(maphieumuon integer primary key autoincrement , giathue integer, ngaymuon text, manguoidung integer references NGUOIDUNG(manguoidung))";
