@@ -66,11 +66,13 @@ public class BookTypeAdapter extends RecyclerView.Adapter<BookTypeViewHolder> {
                 context.startActivity(intent);
             }
         });
+
         if(bookType.getXoa() == 0){
             holder.itemView.setVisibility(View.VISIBLE);
         }
         else {
             holder.itemView.setVisibility(View.GONE);
+            holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0,0));
         }
     }
 

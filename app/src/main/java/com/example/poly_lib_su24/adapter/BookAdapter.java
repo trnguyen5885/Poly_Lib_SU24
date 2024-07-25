@@ -92,11 +92,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
                 ((BooksActivity)context).deleteBook(id, holder.getAdapterPosition());
             }
         });
-     if(books.getXoaSach() == 0){
-          holder.itemView.setVisibility(View.VISIBLE);
-      }
-      else {
-          holder.itemView.setVisibility(View.GONE);
+
+        if(books.getXoaSach() == 0){
+              holder.itemView.setVisibility(View.VISIBLE);
+        }
+        else {
+              holder.itemView.setVisibility(View.GONE);
+              holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0,0));
         }
    }
     public void removeItem(int position) {

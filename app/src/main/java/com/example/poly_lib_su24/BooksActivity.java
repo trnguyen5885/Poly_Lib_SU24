@@ -138,7 +138,7 @@ public class BooksActivity extends AppCompatActivity {
         // tìm kiếm
         else if(text!=null){
             for (Books book : listBooks) {
-                if (book.getTenSach().toLowerCase().contains(text.toLowerCase())) {
+                if (book.getTenSach().toLowerCase().startsWith(text.toLowerCase())) {
                     filteredBooks.add(book);
                 }
             }
@@ -276,7 +276,8 @@ public class BooksActivity extends AppCompatActivity {
         builder.setNegativeButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                xoaKhoiDanhSach(id, position);
+                booksDAO.delete(id);
+                doDuLieu(null);
             }
         });
         builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
