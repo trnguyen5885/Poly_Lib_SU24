@@ -4,14 +4,17 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    android:layout_marginBottom="18dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity=""
         android:orientation="vertical"
-        android:padding="10dp">
+        android:background="@drawable/cardview_gradient_background"
+        android:padding="18dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +30,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtCustomerName"
+                android:id="@+id/txtCustomerID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Khách hàng"
@@ -68,12 +71,12 @@
             android:padding="5dp">
 
             <TextView
+                android:id="@+id/txtCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Đã trả sách"
                 android:textSize="18sp"
                 android:textAllCaps="true"
-
                 android:textColor="#34D53B"/>
 
             <LinearLayout

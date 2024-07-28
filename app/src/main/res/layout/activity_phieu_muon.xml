@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookTypeActivity"
-    android:layout_marginTop="24dp"
+    tools:context=".PhieuMuonActivity"
     android:layout_gravity="center">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -24,7 +23,10 @@
         android:id="@+id/rvPhieuMuon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"/>
+        android:layout_marginTop="70dp"
+        android:padding="10dp"
+
+        />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fButton"
         android:layout_width="wrap_content"
@@ -32,7 +34,7 @@
         android:layout_gravity="bottom|right"
         android:src="@drawable/baseline_add_24"
         android:layout_margin="50dp"
-        app:layout_anchor="@id/rvBookType"
+        app:layout_anchor="@id/rvPhieuMuon"
         app:layout_anchorGravity="bottom|right|end"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
