@@ -85,6 +85,8 @@ public class DpHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO NGUOIDUNG VALUES (1,'Nguyễn Trần Trung Nguyên','trungnguyenk4','5885',1), (2,'Nguyễn Nhật Nam','nhatnamk5','123',2)");
         db.execSQL("INSERT INTO PHIEUMUON VALUES (1, 35000, '01-03-2024',2,1,0)");
         db.execSQL("INSERT INTO PHIEUMUON VALUES (2, 45000, '01-05-2024',3,3,1)");
+        db.execSQL("INSERT INTO PHIEUMUON VALUES (3, 45000, '01-07-2024',3,4,0)");
+
 //        db.execSQL("INSERT INTO CTPM VALUES (1,1,1)");
         db.execSQL("INSERT INTO THANHVIEN VALUES (1,'Nguyễn Nhật Nam',2)");
     }

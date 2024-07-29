@@ -9,10 +9,10 @@
         </shape>
     </item>
     <!-- Gradient overlay with the same rounded corners -->
-    <item android:left="1dp" android:right="1dp" android:top="1dp" android:bottom="1dp">
+    <item android:left="1dp" android:right="2dp" android:top="5dp" android:bottom="1dp">
         <shape android:shape="rectangle">
             <gradient
-                android:startColor="#EC896A"
+                android:startColor="#2463CD"
                 android:endColor="#FFFFFF"
                 android:angle="45" />
             <corners android:radius="9dp" />

@@ -46,13 +46,6 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        btnPhieuMuon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(AdminActivity.this,PhieuMuonActivity.class);
-                startActivity(i);
-            }
-        });
 
         btnPhieuMuon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +80,9 @@ public class AdminActivity extends AppCompatActivity {
                     }
                     else if (item.getItemId() == R.id.sach){
                         Intent intent = new Intent(AdminActivity.this, BooksActivity.class);
+                        startActivity(intent);
+                    }else if (item.getItemId() == R.id.phieuMuon){
+                        Intent intent = new Intent(AdminActivity.this, PhieuMuonActivity.class);
                         startActivity(intent);
                     }
                 return false;

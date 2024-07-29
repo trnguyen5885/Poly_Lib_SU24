@@ -5,10 +5,12 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.poly_lib_su24.DAO.PhieuMuonDAO;
 import com.example.poly_lib_su24.R;
 import com.example.poly_lib_su24.model.Books;
 import com.example.poly_lib_su24.model.PhieuMuon;
@@ -37,26 +39,43 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull PhieuMuonViewHolder holder, int position) {
-        holder.txtID.setText("Mã phiếu mượn "+ listPM.get(position).getMaPhieu() );
-        holder.txtMaKH.setText("Mã Khách Hàng "+ listPM.get(position).getMaND() );
-        holder.txtTenSach.setText("Tên sách "+ listPM.get(position).getTenSach() );
-        holder.txtTienThue.setText("Tiền thuê "+ listPM.get(position).getGiathue() );
+        holder.txtID.setText("Mã phiếu mượn: "+ listPM.get(position).getMaPhieu() );
+        holder.txtMaKH.setText("Mã thành viên: "+ listPM.get(position).getMaND() );
+        holder.txtTenSach.setText("Tên sách: "+ listPM.get(position).getTenSach() );
+        holder.txtTienThue.setText("Tiền thuê: "+ listPM.get(position).getGiathue() );
         holder.txtNgayThue.setText("Ngày thuê: "+ listPM.get(position).getNgayThue() );
         String trangthai ="";
         if(listPM.get(position).getTrangthai()==1){
             trangthai = "Đã trả sách";
+            holder.txtCheck.setTextColor(Color.parseColor("#FF4CAF50"));
+            holder.btnTraSach.setVisibility(View.GONE);
         }else{
             trangthai = "Chưa trả sách";
             holder.txtCheck.setTextColor(Color.parseColor("#FFF44336"));
+            holder.btnTraSach.setVisibility(View.VISIBLE);
+
         }
         holder.txtCheck.setText("" + trangthai);
 
+        holder.btnTraSach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PhieuMuonDAO phieuMuonDAO = new PhieuMuonDAO(context);
+                boolean kiemtra = phieuMuonDAO.thayDoiTrangThai(listPM.get(holder.getAdapterPosition()).getMaPhieu());
+                if (kiemtra == true)
+                {
+                    listPM.clear();
+                    listPM = phieuMuonDAO.getDSPhieuMuon();
+                    notifyDataSetChanged();
+                    Toast.makeText(context,"Thay doi trang thai thanh cong",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context,"Thay doi trang thai khong thanh cong",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
-    public void removeItemPM(int position) {
-        listPM.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, listPM.size());
-    }
+
     @Override
     public int getItemCount() {
         return listPM.size();

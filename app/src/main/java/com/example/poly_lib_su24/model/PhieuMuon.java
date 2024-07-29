@@ -15,6 +15,14 @@ public class PhieuMuon {
         this.tenSach = tenSach;
     }
 
+    public PhieuMuon(int giathue, int maND, int trangthai, int maSach, String ngayThue) {
+        this.giathue = giathue;
+        this.maND = maND;
+        this.trangthai = trangthai;
+        this.maSach = maSach;
+        this.ngayThue = ngayThue;
+    }
+
     public int getMaPhieu() {
         return maPhieu;
     }

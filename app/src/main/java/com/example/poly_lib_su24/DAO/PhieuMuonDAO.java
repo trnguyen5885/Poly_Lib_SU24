@@ -1,5 +1,6 @@
 package com.example.poly_lib_su24.DAO;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -35,7 +36,34 @@ public class PhieuMuonDAO {
         }
         return list;
     }
+    public boolean thayDoiTrangThai(int mapm){
+        SQLiteDatabase sqLiteDatabase = dpHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("trangthai",1);
+        long check = sqLiteDatabase.update("PHIEUMUON",contentValues,"maphieumuon = ?",new String[]{String.valueOf(mapm)});
+        if(check == -1) {
+            return false;
+        }
+        else return true;
+    }
+    public boolean addItemPM(PhieuMuon phieuMuon) {
+        SQLiteDatabase sqLiteDatabase = dpHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        //PHIEUMUON(maphieumuon integer primary key autoincrement , giathue integer, ngaymuon text, manguoidung integer references NGUOIDUNG(manguoidung), masach integer references SACH(masach), trangthai integer
+        contentValues.put("maphieumuon", phieuMuon.getMaPhieu());
+        contentValues.put("giathue", phieuMuon.getGiathue());
+        contentValues.put("ngaymuon", phieuMuon.getNgayThue());
+        contentValues.put("manguoidung", phieuMuon.getMaND());
+        contentValues.put("masach", phieuMuon.getMaSach());
+        contentValues.put("trangthai", phieuMuon.getTrangthai());
 
+        long check = sqLiteDatabase.insert("PHIEUMUON", null, contentValues);
+        if (check == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 
 }

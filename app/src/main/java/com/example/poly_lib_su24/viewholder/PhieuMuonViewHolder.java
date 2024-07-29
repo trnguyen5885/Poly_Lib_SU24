@@ -13,7 +13,7 @@ import com.example.poly_lib_su24.R;
 public class PhieuMuonViewHolder extends RecyclerView.ViewHolder{
 
     public TextView txtID,txtTenSach,txtMaKH,txtCheck,txtNgayThue,txtTienThue;
-    public Button btnDelete, btnEdit;
+    public Button btnTraSach;
     public PhieuMuonViewHolder(@NonNull View itemView) {
         super(itemView);
         this.txtID = itemView.findViewById(R.id.txtIdTicket);
@@ -22,7 +22,6 @@ public class PhieuMuonViewHolder extends RecyclerView.ViewHolder{
         this.txtTienThue = itemView.findViewById(R.id.txtBookPrice);
         this.txtNgayThue = itemView.findViewById(R.id.txtNgayThue);
         this.txtCheck = itemView.findViewById(R.id.txtCheck);
-        this.btnEdit = itemView.findViewById(R.id.btnEdit);
-        this.btnDelete = itemView.findViewById(R.id.btnDelete);
+        this.btnTraSach = itemView.findViewById(R.id.btnTraSach);
     }
 }
