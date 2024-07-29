@@ -17,10 +17,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ThongKeActivity"
+            android:exported="false"
+            android:parentActivityName=".AdminActivity" />
+            />
+        <activity
             android:name=".PhieuMuonActivity"
             android:exported="false"
-            android:parentActivityName=".AdminActivity"
-            />
+            android:parentActivityName=".AdminActivity" />
         <activity
             android:name=".BookTypeActivity"
             android:exported="false"
@@ -28,13 +32,11 @@
         <activity
             android:name=".AdminActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".adapter.BookAdapter"
@@ -54,9 +56,7 @@
             android:exported="false" />
         <activity
             android:name=".WelcomeActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" />

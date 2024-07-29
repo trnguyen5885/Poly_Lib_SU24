@@ -55,6 +55,14 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        btnThongKe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AdminActivity.this, ThongKeActivity.class);
+                startActivity(i);
+            }
+        });
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.logotoolbar);
