@@ -64,6 +64,7 @@ public class BooksActivity extends AppCompatActivity {
     String linkHinh = "";
     SearchView searchView;
     ArrayList<Books> filteredBooks;
+    ArrayList<Books> searchBooks;
 
     private final int PERMISSION_CODE = 1;
     @Override
@@ -121,6 +122,7 @@ public class BooksActivity extends AppCompatActivity {
     public void doDuLieu(String text){
         listBooks = booksDAO.getAllBooks();
         filteredBooks = new ArrayList<>();
+        searchBooks = new ArrayList<>();
         // Lấy thể loại từ Intent
         int bookType = getIntent().getIntExtra("bookType", -1);// Default là -1 nếu không tìm thấy giá trị
         // Lọc sách theo thể loại
@@ -139,10 +141,10 @@ public class BooksActivity extends AppCompatActivity {
         else if(text!=null){
             for (Books book : listBooks) {
                 if (book.getTenSach().toLowerCase().startsWith(text.toLowerCase())) {
-                    filteredBooks.add(book);
+                    searchBooks.add(book);
                 }
             }
-            adapter = new BookAdapter(BooksActivity.this, filteredBooks);
+            adapter = new BookAdapter(BooksActivity.this, searchBooks);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
             rvCustomers.setLayoutManager(linearLayoutManager);
             rvCustomers.setAdapter(adapter);
@@ -188,23 +190,27 @@ public class BooksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String tenSach = edtTenLoaiSach.getText().toString();
-                int giaSach = Integer.parseInt(edtGiaSach.getText().toString());
                 int maTheLoai = Integer.parseInt(txtMaLoai.getText().toString());
-                if(tenSach.length() == 0||giaSach == 0){
+
+                String maLoaiSachString = edtGiaSach.getText().toString();
+                try {
+                    if (tenSach.length() == 0||maLoaiSachString.length() == 0) {
+                        Toast.makeText(BooksActivity.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                    } else {
+                        int giaSach = Integer.parseInt(edtGiaSach.getText().toString());
+                        Books books = new Books(tenSach, giaSach, maTheLoai, linkHinh);
+                        boolean check = booksDAO.addBook(books);
+                        if (check) {
+                            Toast.makeText(BooksActivity.this, "Thêm loại sách thành công", Toast.LENGTH_SHORT).show();
+                            doDuLieu(null);
+                            dialog.dismiss();
+                        } else {
+                            Toast.makeText(BooksActivity.this, "Thêm loại sách thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }catch (Exception e){
                     Toast.makeText(BooksActivity.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 }
-                else {
-                    Books books = new Books(tenSach, giaSach, maTheLoai, linkHinh);
-                    boolean check = booksDAO.addBook(books);
-                    if (check) {
-                        Toast.makeText(BooksActivity.this, "Thêm loại sách thành công", Toast.LENGTH_SHORT).show();
-                        doDuLieu(null);
-                        dialog.dismiss();
-                    } else {
-                        Toast.makeText(BooksActivity.this, "Thêm loại sách thất bại", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
             }
         });
 
@@ -245,11 +251,21 @@ public class BooksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String tenSach = edtTenSach.getText().toString();
-                int giaSach = Integer.parseInt(edtGiaSach.getText().toString());
-                Books booksNew = new Books(books.getMaSach(), tenSach, giaSach, books.getMaLoai(),  books.getTenLoaiSach(), linkHinh);
-                booksDAO.edit(booksNew);
-                doDuLieu(null);
-                dialog.dismiss();
+                String giaSachString = edtGiaSach.getText().toString();
+
+                try {
+                    if (tenSach.length() == 0 || giaSachString.length() == 0) {
+                        Toast.makeText(BooksActivity.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                    } else {
+                        int giaSach = Integer.parseInt(giaSachString);
+                        Books booksNew = new Books(books.getMaSach(), tenSach, giaSach, books.getMaLoai(), books.getTenLoaiSach(), linkHinh);
+                        booksDAO.edit(booksNew);
+                        doDuLieu(null);
+                        dialog.dismiss();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(BooksActivity.this, "Đã xảy ra lỗi, vui lòng thử lại", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         imgSach.setOnClickListener(new View.OnClickListener() {

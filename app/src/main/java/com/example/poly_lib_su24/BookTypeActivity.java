@@ -174,10 +174,14 @@ public class BookTypeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String tenTheLoaiSach = edtTenLoaiSach.getText().toString();
-                BookType bookTypeNew = new BookType(bookType.getMaLoai(), tenTheLoaiSach,linkHinh);
-                bookTypeDAO.edit(bookTypeNew);
-                doDuLieu();
-                dialog.dismiss();
+                if(tenTheLoaiSach.length()==0){
+                    Toast.makeText(BookTypeActivity.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }else {
+                    BookType bookTypeNew = new BookType(bookType.getMaLoai(), tenTheLoaiSach, linkHinh);
+                    bookTypeDAO.edit(bookTypeNew);
+                    doDuLieu();
+                    dialog.dismiss();
+                }
             }
         });
 
