@@ -76,7 +76,12 @@ public class DpHelper extends SQLiteOpenHelper {
 //                manguoidung integer references NGUOIDUNG(manguoidung)
 //        )
 
-        String sqlThanhVien = "CREATE TABLE THANHVIEN( mathanhvien integer primary key autoincrement, tenthanhvien text, manguoidung integer references NGUOIDUNG(manguoidung))";
+        String sqlThanhVien = "CREATE TABLE THANHVIEN(" +
+                "mathanhvien INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "tenthanhvien TEXT, " +
+                "manguoidung INTEGER REFERENCES NGUOIDUNG(manguoidung), " +
+                "img TEXT, " +
+                "xoa INTEGER)";
         db.execSQL(sqlThanhVien);
 
 //        Data mẫu
@@ -88,7 +93,7 @@ public class DpHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO PHIEUMUON VALUES (3, 45000, '01-07-2024',3,4,0)");
 
 //        db.execSQL("INSERT INTO CTPM VALUES (1,1,1)");
-        db.execSQL("INSERT INTO THANHVIEN VALUES (1,'Nguyễn Nhật Nam',2)");
+        db.execSQL("INSERT INTO THANHVIEN VALUES (1,'Nguyễn Nhật Nam',2,'https://res.cloudinary.com/namnn512/image/upload/v1721122941/r2vedgox1ag2ohrfesez.jpg',''),(2, 'Nguyễn Hoàng Tuấn',4,'https://res.cloudinary.com/namnn512/image/upload/v1721129837/hscysntrnuiqgp2kv2hg.jpg',''), (3, 'Nguyễn Trần Trung Nguyên',6,'https://res.cloudinary.com/namnn512/image/upload/v1721129790/ctbrgmh1tuxjp47rnnqs.jpg','')");
     }
 
 

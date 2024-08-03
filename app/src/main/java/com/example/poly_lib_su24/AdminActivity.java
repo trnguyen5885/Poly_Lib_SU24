@@ -63,6 +63,14 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        btnThanhVien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AdminActivity.this, ThanhVienActivity.class);
+                startActivity(i);
+            }
+        });
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.logotoolbar);
@@ -91,6 +99,9 @@ public class AdminActivity extends AppCompatActivity {
                         startActivity(intent);
                     }else if (item.getItemId() == R.id.phieuMuon){
                         Intent intent = new Intent(AdminActivity.this, PhieuMuonActivity.class);
+                        startActivity(intent);
+                    }else if (item.getItemId() == R.id.thanhVien){
+                        Intent intent = new Intent(AdminActivity.this, ThanhVienActivity.class);
                         startActivity(intent);
                     }
                 return false;

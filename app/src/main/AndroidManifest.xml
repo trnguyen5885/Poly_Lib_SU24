@@ -20,7 +20,10 @@
             android:name=".ThongKeActivity"
             android:exported="false"
             android:parentActivityName=".AdminActivity" />
-            />
+        <activity
+            android:name=".ThanhVienActivity"
+            android:exported="false"
+            android:parentActivityName=".ThanhVienActivity"/>
         <activity
             android:name=".PhieuMuonActivity"
             android:exported="false"
