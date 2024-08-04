@@ -203,6 +203,11 @@ public class BookTypeActivity extends AppCompatActivity {
         builder.setNegativeButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                BookType bookType = bookTypeDAO.getAllBookType().get(id-1);
+                if (bookType != null) {
+                    bookType.setTenLoaiSach(null);
+                    bookTypeDAO.edit(bookType);
+                }
                 bookTypeDAO.delete(id);
                 doDuLieu();
             }

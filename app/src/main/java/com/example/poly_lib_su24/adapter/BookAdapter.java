@@ -93,10 +93,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
             }
         });
 
-        if(books.getXoaSach() == 0){
+        if(books.getXoaSach() == 0 && books.getTenLoaiSach()!=null){
               holder.itemView.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else if (books.getTenLoaiSach() == null) {
+            holder.itemView.setVisibility(View.GONE);
+            holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0,0));
+        } else {
               holder.itemView.setVisibility(View.GONE);
               holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0,0));
         }
