@@ -227,7 +227,6 @@ public class BookTypeActivity extends AppCompatActivity {
     // Cấp quyền truy cập bộ nhớ
     private void requestPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "Cấp quyền thành công", Toast.LENGTH_SHORT).show();
         } else {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_CODE);
         }
