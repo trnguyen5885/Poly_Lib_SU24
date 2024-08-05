@@ -45,22 +45,28 @@ public class RegisterActivity extends AppCompatActivity {
                 String matkhau = txtMatKhau.getText().toString();
                 String xacnhanmatkhau = txtXacNhanMatKhau.getText().toString();
 
-                if(xacnhanmatkhau.equals(matkhau)) {
-                    NguoiDung nguoiDung = new NguoiDung(tendangnhap, xacnhanmatkhau);
-                    boolean check = nguoiDungDAO.DangKyNguoiDung(nguoiDung);
-
-                    if(check) {
-                        Toast.makeText(RegisterActivity.this,"Đăng kí thành công", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
+                if(tendangnhap.equals("") || matkhau.equals("") || xacnhanmatkhau.equals("")) {
+                    Toast.makeText(RegisterActivity.this,"Đăng kí không thành công vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Đăng kí không thành công", Toast.LENGTH_SHORT).show();
-                    txtDangNhap.setText("");
-                    txtMatKhau.setText("");
-                    txtXacNhanMatKhau.setText("");
-                    txtDangNhap.requestFocus();
+                    if(xacnhanmatkhau.equals(matkhau)) {
+                        NguoiDung nguoiDung = new NguoiDung(tendangnhap, xacnhanmatkhau);
+                        boolean check = nguoiDungDAO.DangKyNguoiDung(nguoiDung);
 
+                        if(check) {
+                            Toast.makeText(RegisterActivity.this,"Đăng kí thành công", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "Đăng kí không thành công", Toast.LENGTH_SHORT).show();
+                        txtDangNhap.setText("");
+                        txtMatKhau.setText("");
+                        txtXacNhanMatKhau.setText("");
+                        txtDangNhap.requestFocus();
+
+                    }
                 }
+
+
 
 
 

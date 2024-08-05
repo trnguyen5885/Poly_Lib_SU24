@@ -4,7 +4,6 @@
     <!-- Solid background with rounded corners -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#000000" />
             <corners android:radius="10dp" />
         </shape>
     </item>
@@ -12,7 +11,7 @@
     <item android:left="1dp" android:right="2dp" android:top="5dp" android:bottom="1dp">
         <shape android:shape="rectangle">
             <gradient
-                android:startColor="#2463CD"
+                android:startColor="#ED7D2D"
                 android:endColor="#FFFFFF"
                 android:angle="45" />
             <corners android:radius="9dp" />

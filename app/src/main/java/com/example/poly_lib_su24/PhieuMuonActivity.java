@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SimpleAdapter;
@@ -88,7 +89,6 @@ public class PhieuMuonActivity extends AppCompatActivity {
     }
 
     private void showDialog(){
-
         AlertDialog.Builder builder = new AlertDialog.Builder(PhieuMuonActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View v = inflater.inflate(R.layout.dialog_them_phieumuon,null);
@@ -96,7 +96,7 @@ public class PhieuMuonActivity extends AppCompatActivity {
         Spinner spnSach = v.findViewById(R.id.spnSach);
         EditText edtGiaThue = v.findViewById(R.id.edtGiaThue);
         getDataThanhVien(spnThanhVien);
-        getDataSach(spnSach);
+        getDataSach(spnSach, edtGiaThue);
         builder.setView(v);
 
         builder.setPositiveButton("Thêm", new DialogInterface.OnClickListener() {
@@ -146,7 +146,7 @@ public class PhieuMuonActivity extends AppCompatActivity {
                         new int[]{android.R.id.text1});
         spnThanhVien.setAdapter(simpleAdapter);
     }
-    private void getDataSach(Spinner spnSach){
+    private void getDataSach(Spinner spnSach,EditText edtGiaThue ){
         BooksDAO booksDAO=  new BooksDAO(PhieuMuonActivity.this);
         ArrayList<Books> listBook = booksDAO.getAllBooks();
 
@@ -155,6 +155,7 @@ public class PhieuMuonActivity extends AppCompatActivity {
             HashMap<String,Object> hs = new HashMap<>();
             hs.put("masach",books.getMaSach());
             hs.put("tensach",books.getTenSach());
+            hs.put("giathue", books.getGiaSach());
             listHM.add(hs);
         }
 
@@ -165,6 +166,21 @@ public class PhieuMuonActivity extends AppCompatActivity {
                 new String[]{"tensach"},
                 new int[]{android.R.id.text2});
         spnSach.setAdapter(simpleAdapter);
+
+        spnSach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                HashMap<String, Object> selectedBook = (HashMap<String, Object>) parent.getItemAtPosition(position);
+                int giaThue = (int) selectedBook.get("giathue");
+                edtGiaThue.setText(String.valueOf(giaThue));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                edtGiaThue.setText("");
+            }
+        });
+
     }
 
     private void themPhieuMuon(int matv, int maSach,int giaTien){
