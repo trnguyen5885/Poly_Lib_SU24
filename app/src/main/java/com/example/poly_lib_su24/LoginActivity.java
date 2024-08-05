@@ -55,12 +55,22 @@ public class LoginActivity extends AppCompatActivity {
 
                 boolean kiemTraDangNhap = nguoiDungDAO.KiemTraDangNhap(tendangnhap, matkhau);
 
-                if(kiemTraDangNhap) {
-                    Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                    startActivity(intent);
+                if(tendangnhap.equals("") || matkhau.equals("")) {
+                    Toast.makeText(LoginActivity.this, "Tên đăng nhập hoặc mật khẩu không được để trống", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Tên đăng nhập hoặc mật khẩu sai", Toast.LENGTH_SHORT).show();
+
+                    if(kiemTraDangNhap) {
+                        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Tên đăng nhập hoặc mật khẩu sai", Toast.LENGTH_SHORT).show();
+                    }
+
+
                 }
+
+
 
             }
         });
