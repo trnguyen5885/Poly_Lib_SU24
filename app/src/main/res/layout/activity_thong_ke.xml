@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ThongKeActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBarTK"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ngày bắt đầu"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:cursorColor="#ee7d2c"
+            app:boxStrokeColor="#ee7d2c"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtNgayBatDau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHighlight="#ee7d2c"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ngày kết thúc"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:cursorColor="#ee7d2c"
+            app:boxStrokeColor="#ee7d2c"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtNgayKetThuc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHighlight="#ee7d2c"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnThongKe"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:textSize="21dp"
+            android:text="Thống kê"
+            android:textStyle="bold"
+            app:backgroundTint="@null"
+            android:background="@drawable/primary_button"
+            />
+
+
+        <TextView
+            android:layout_marginTop="25dp"
+            android:id="@+id/txtResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0VNĐ"
+            android:gravity="center_horizontal"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

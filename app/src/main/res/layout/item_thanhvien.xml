@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/card_background"
+    android:elevation="1dp"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imgThanhvien"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_margin="5dp"
+        android:src="@drawable/kienthuc"/>
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvmaThanhvien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID:01"/>
+
+        <TextView
+            android:id="@+id/tvtenThanhvien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kiến Thức"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/baseline_edit_24"/>
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/baseline_delete_24"/>
+    </LinearLayout>
+
+</LinearLayout>

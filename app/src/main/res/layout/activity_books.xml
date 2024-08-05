@@ -18,20 +18,20 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp">
-            <SearchView
-                android:id="@+id/searchView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:queryHint="Search" />
         </androidx.appcompat.widget.Toolbar>
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:queryHint="Search" />
         </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="110dp">
         </androidx.recyclerview.widget.RecyclerView>
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fButton"

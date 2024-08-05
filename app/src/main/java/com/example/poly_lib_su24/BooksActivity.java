@@ -64,6 +64,7 @@ public class BooksActivity extends AppCompatActivity {
     String linkHinh = "";
     SearchView searchView;
     ArrayList<Books> filteredBooks;
+    ArrayList<Books> searchBooks;
 
     private final int PERMISSION_CODE = 1;
     @Override
@@ -82,7 +83,12 @@ public class BooksActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         String tenLoai = getIntent().getStringExtra("tenLoai");
-        getSupportActionBar().setTitle(tenLoai);
+        if(tenLoai!=null) {
+            getSupportActionBar().setTitle(tenLoai);
+        }else {
+            getSupportActionBar().setTitle("Quản lý sách");
+            fButton.setVisibility(View.GONE);
+        }
 
         int space = getResources().getDimensionPixelOffset(R.dimen.item_space);
         rvCustomers.addItemDecoration(new SpaceItem(space));
@@ -118,45 +124,41 @@ public class BooksActivity extends AppCompatActivity {
             }
         });
     }
-    public void doDuLieu(String text){
+    public void doDuLieu(String text) {
         listBooks = booksDAO.getAllBooks();
-        filteredBooks = new ArrayList<>();
+        ArrayList<Books> filteredBooks = new ArrayList<>();
         // Lấy thể loại từ Intent
-        int bookType = getIntent().getIntExtra("bookType", -1);// Default là -1 nếu không tìm thấy giá trị
+        int bookType = getIntent().getIntExtra("bookType", -1); // Default là -1 nếu không tìm thấy giá trị
         // Lọc sách theo thể loại
-        if(bookType != -1) {
+        if (bookType != -1) {
             for (Books books : listBooks) {
                 if (books.getMaLoai() == bookType) {
                     filteredBooks.add(books);
                 }
             }
-            adapter = new BookAdapter(BooksActivity.this, filteredBooks);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
-            rvCustomers.setLayoutManager(linearLayoutManager);
-            rvCustomers.setAdapter(adapter);
         }
-        // tìm kiếm
-        else if(text!=null){
+        // Tìm kiếm
+        else if (text != null && !text.isEmpty()) {
             for (Books book : listBooks) {
                 if (book.getTenSach().toLowerCase().startsWith(text.toLowerCase())) {
                     filteredBooks.add(book);
                 }
             }
-            adapter = new BookAdapter(BooksActivity.this, filteredBooks);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
-            rvCustomers.setLayoutManager(linearLayoutManager);
-            rvCustomers.setAdapter(adapter);
         }
-        else{
-            adapter = new BookAdapter(BooksActivity.this, listBooks);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
-            rvCustomers.setLayoutManager(linearLayoutManager);
-            rvCustomers.setAdapter(adapter);
+        // Không lọc hoặc tìm kiếm
+        else {
+            filteredBooks = listBooks;
         }
 
+        // Cập nhật adapter và layout manager
+        adapter = new BookAdapter(BooksActivity.this, filteredBooks);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
+        rvCustomers.setLayoutManager(linearLayoutManager);
+        rvCustomers.setAdapter(adapter);
     }
 
-    public void dialogThemSach(){
+
+    public void dialogThemSach() {
         AlertDialog.Builder builder = new AlertDialog.Builder(BooksActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View v = inflater.inflate(R.layout.dialog_them_sach, null);
@@ -166,7 +168,7 @@ public class BooksActivity extends AppCompatActivity {
         EditText edtTenLoaiSach = v.findViewById(R.id.edtTenSach);
         EditText edtGiaSach = v.findViewById(R.id.edtGiaSach);
         TextView txtTheLoai = v.findViewById(R.id.txtTheLoai);
-        TextView txtMaLoai =  v.findViewById(R.id.txtMaLoai);
+        TextView txtMaLoai = v.findViewById(R.id.txtMaLoai);
         Button btnThem = v.findViewById(R.id.btnThem);
         Button btnHuy = v.findViewById(R.id.btnHuy);
         imgSach = v.findViewById(R.id.imgSach);
@@ -175,7 +177,7 @@ public class BooksActivity extends AppCompatActivity {
         // Lấy mã loại và tên loại từ intent đã được gửi
         int maLoai = getIntent().getIntExtra("bookType", -1);
         String tenLoai = getIntent().getStringExtra("tenLoai");
-        txtMaLoai.setText(maLoai+"");
+        txtMaLoai.setText(String.valueOf(maLoai));
         txtTheLoai.setText(tenLoai);
 
         imgSach.setOnClickListener(new View.OnClickListener() {
@@ -184,27 +186,34 @@ public class BooksActivity extends AppCompatActivity {
                 accessTheGallery();
             }
         });
+
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String tenSach = edtTenLoaiSach.getText().toString();
-                int giaSach = Integer.parseInt(edtGiaSach.getText().toString());
-                int maTheLoai = Integer.parseInt(txtMaLoai.getText().toString());
-                if(tenSach.length() == 0||giaSach == 0){
+                String giaSachString = edtGiaSach.getText().toString();
+
+                if (tenSach.isEmpty() || giaSachString.isEmpty()) {
                     Toast.makeText(BooksActivity.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-                else {
+
+                try {
+                    int giaSach = Integer.parseInt(giaSachString);
+                    int maTheLoai = Integer.parseInt(txtMaLoai.getText().toString());
+
                     Books books = new Books(tenSach, giaSach, maTheLoai, linkHinh);
                     boolean check = booksDAO.addBook(books);
                     if (check) {
-                        Toast.makeText(BooksActivity.this, "Thêm loại sách thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BooksActivity.this, "Thêm sách thành công", Toast.LENGTH_SHORT).show();
                         doDuLieu(null);
                         dialog.dismiss();
                     } else {
-                        Toast.makeText(BooksActivity.this, "Thêm loại sách thất bại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BooksActivity.this, "Thêm sách thất bại", Toast.LENGTH_SHORT).show();
                     }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(BooksActivity.this, "Giá sách phải là một số nguyên", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
@@ -214,9 +223,11 @@ public class BooksActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+
         dialog.show();
     }
-    public void suaSach(Books books){
+
+    public void suaSach(Books books) {
         AlertDialog.Builder builder = new AlertDialog.Builder(BooksActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View v = inflater.inflate(R.layout.dialog_them_sach, null);
@@ -239,19 +250,38 @@ public class BooksActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
 
         Button btnSua = v.findViewById(R.id.btnThem);
-        Button btnHuy =  v.findViewById(R.id.btnHuy);
+        Button btnHuy = v.findViewById(R.id.btnHuy);
+
+        btnSua.setText("Sửa");
 
         btnSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String tenSach = edtTenSach.getText().toString();
-                int giaSach = Integer.parseInt(edtGiaSach.getText().toString());
-                Books booksNew = new Books(books.getMaSach(), tenSach, giaSach, books.getMaLoai(),  books.getTenLoaiSach(), linkHinh);
-                booksDAO.edit(booksNew);
-                doDuLieu(null);
-                dialog.dismiss();
+                String giaSachString = edtGiaSach.getText().toString();
+
+                if (tenSach.isEmpty() || giaSachString.isEmpty()) {
+                    Toast.makeText(BooksActivity.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    int giaSach = Integer.parseInt(giaSachString);
+                    Books booksNew = new Books(books.getMaSach(), tenSach, giaSach, books.getMaLoai(), books.getTenLoaiSach(), linkHinh);
+                    boolean success = booksDAO.edit(booksNew);
+                    if (success) {
+                        Toast.makeText(BooksActivity.this, "Sửa sách thành công", Toast.LENGTH_SHORT).show();
+                        doDuLieu(null);
+                        dialog.dismiss();
+                    } else {
+                        Toast.makeText(BooksActivity.this, "Sửa sách thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(BooksActivity.this, "Giá sách phải là một số nguyên", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
         imgSach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -265,8 +295,10 @@ public class BooksActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+
         dialog.show();
     }
+
     public void deleteBook(int id, int position){
         AlertDialog.Builder builder = new AlertDialog.Builder(BooksActivity.this);
         builder.setTitle("Cảnh Báo");
@@ -289,18 +321,7 @@ public class BooksActivity extends AppCompatActivity {
         AlertDialog adialog =  builder.create();
         adialog.show();
     }
-    private void xoaKhoiDanhSach(int id, int position) {
-        // Xóa sách khỏi danh sách và cập nhật RecyclerView
-        for (int i = 0; i < listBooks.size(); i++) {
-            if (listBooks.get(i).getMaSach() == id) {
-                listBooks.remove(i);
-                adapter.removeItem(position);
-                adapter.notifyItemRemoved(position);
-                adapter.notifyItemRangeChanged(position, listBooks.size());
-                break;
-            }
-        }
-    }
+
     private void requestPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this, "Cấp quyền thành công", Toast.LENGTH_SHORT).show();

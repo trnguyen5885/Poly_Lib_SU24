@@ -1,13 +1,11 @@
 package com.example.poly_lib_su24.DAO;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.poly_lib_su24.database.DpHelper;
-import com.example.poly_lib_su24.model.BookType;
 import com.example.poly_lib_su24.model.Books;
 
 import java.util.ArrayList;
@@ -58,12 +56,13 @@ public class BooksDAO {
         values.put("xoa", 1);
         db.update("sach", values,"masach=?",  new String[]{maSach+""});
     }
-    public void edit(Books books){
+    public boolean edit(Books books){
         SQLiteDatabase db =  helper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("tensach", books.getTenSach());
         values.put("giasach", books.getGiaSach());
         values.put("img", books.getImg());
         db.update("sach", values, "masach=?", new String[]{books.getMaSach()+""});
+        return true;
     }
 }

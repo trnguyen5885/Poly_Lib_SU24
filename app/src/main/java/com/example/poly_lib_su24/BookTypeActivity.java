@@ -174,10 +174,14 @@ public class BookTypeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String tenTheLoaiSach = edtTenLoaiSach.getText().toString();
-                BookType bookTypeNew = new BookType(bookType.getMaLoai(), tenTheLoaiSach,linkHinh);
-                bookTypeDAO.edit(bookTypeNew);
-                doDuLieu();
-                dialog.dismiss();
+                if(tenTheLoaiSach.length()==0){
+                    Toast.makeText(BookTypeActivity.this, "Nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }else {
+                    BookType bookTypeNew = new BookType(bookType.getMaLoai(), tenTheLoaiSach, linkHinh);
+                    bookTypeDAO.edit(bookTypeNew);
+                    doDuLieu();
+                    dialog.dismiss();
+                }
             }
         });
 
@@ -199,6 +203,11 @@ public class BookTypeActivity extends AppCompatActivity {
         builder.setNegativeButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                BookType bookType = bookTypeDAO.getAllBookType().get(id-1);
+                if (bookType != null) {
+                    bookType.setTenLoaiSach(null);
+                    bookTypeDAO.edit(bookType);
+                }
                 bookTypeDAO.delete(id);
                 doDuLieu();
             }
@@ -218,7 +227,6 @@ public class BookTypeActivity extends AppCompatActivity {
     // Cấp quyền truy cập bộ nhớ
     private void requestPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "Cấp quyền thành công", Toast.LENGTH_SHORT).show();
         } else {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_CODE);
         }

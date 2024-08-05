@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/dialog_background">
+
+    <!-- Tiêu đề của dialog -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#ED7D2D"
+        android:text="Thêm Thành Viên"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="30dp"
+        android:textStyle="bold"/>
+
+    <!-- Phần nội dung của dialog -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/edtMaThanhVien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mã Thành Viên"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/edtTenThanhVien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên Thành Viên"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HÌNH ẢNH"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/imgThanhVien"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/baseline_image_24"/>
+        <TextView
+            android:id="@+id/txtTrangThaitv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+        <!-- Nút xác nhận và hủy -->
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnThem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_button_orange2"
+                app:backgroundTint="@null"
+                android:text="Xác Nhận"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/btnHuy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_button_white"
+                app:backgroundTint="@null"
+                android:text="Hủy"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
