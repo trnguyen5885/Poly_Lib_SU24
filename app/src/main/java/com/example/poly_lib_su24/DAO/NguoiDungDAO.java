@@ -35,6 +35,7 @@ public class NguoiDungDAO {
     public boolean DangKyNguoiDung(NguoiDung nguoiDung) {
         SQLiteDatabase db = dpHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put("hoten", "Nguyễn Hoàng Tuấn");
         values.put("tendangnhap",nguoiDung.getTendangnhap());
         values.put("matkhau", nguoiDung.getMatkhau());
         long check = db.insert("NGUOIDUNG", null, values);

@@ -89,11 +89,10 @@ public class DpHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO SACH VALUES (1, 'Hiểu về trái tim', 35000, 1,'',''), (2, 'Kỹ năng thuyết trình', 25000, 2,'',''), (3, 'Hai Vạn Năm', 28000, 3,'',''), (4, 'Nắng xuân', 19000, 4,'','')");
         db.execSQL("INSERT INTO NGUOIDUNG VALUES (1,'Nguyễn Trần Trung Nguyên','trungnguyenk4','5885',1), (2,'Nguyễn Nhật Nam','nhatnamk5','123',2)");
         db.execSQL("INSERT INTO PHIEUMUON VALUES (1, 35000, '01-03-2024',2,1,0)");
-        db.execSQL("INSERT INTO PHIEUMUON VALUES (2, 45000, '01-05-2024',3,3,1)");
-        db.execSQL("INSERT INTO PHIEUMUON VALUES (3, 45000, '01-07-2024',3,4,0)");
+
 
 //        db.execSQL("INSERT INTO CTPM VALUES (1,1,1)");
-        db.execSQL("INSERT INTO THANHVIEN VALUES (1,'Nguyễn Nhật Nam',2,'https://res.cloudinary.com/namnn512/image/upload/v1721122941/r2vedgox1ag2ohrfesez.jpg',''),(2, 'Nguyễn Hoàng Tuấn',4,'https://res.cloudinary.com/namnn512/image/upload/v1721129837/hscysntrnuiqgp2kv2hg.jpg',''), (3, 'Nguyễn Trần Trung Nguyên',6,'https://res.cloudinary.com/namnn512/image/upload/v1721129790/ctbrgmh1tuxjp47rnnqs.jpg','')");
+        db.execSQL("INSERT INTO THANHVIEN VALUES (1,'Nguyễn Nhật Nam',2,'https://res.cloudinary.com/namnn512/image/upload/v1721122941/r2vedgox1ag2ohrfesez.jpg','')");
     }
 
 

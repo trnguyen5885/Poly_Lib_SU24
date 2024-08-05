@@ -19,7 +19,7 @@ public class PhieuMuonDAO {
     public ArrayList<PhieuMuon> getDSPhieuMuon(){
         ArrayList<PhieuMuon> list = new ArrayList<>();
         SQLiteDatabase db = dpHelper.getReadableDatabase();
-        Cursor c = db.rawQuery("select pm.maphieumuon, pm.giathue, pm.ngaymuon, tv.manguoidung, s.masach,s.tensach, pm.trangthai from thanhvien tv, sach s, phieumuon pm  where s.masach=pm.masach", null);
+        Cursor c = db.rawQuery("select pm.maphieumuon, pm.giathue, pm.ngaymuon, nd.manguoidung, s.masach,s.tensach, pm.trangthai from nguoidung nd, sach s, phieumuon pm  where s.masach=pm.masach and nd.manguoidung = pm.manguoidung", null);
         if(c.moveToFirst()){
             do{
                 int maPhieuMuon = c.getInt(0);
