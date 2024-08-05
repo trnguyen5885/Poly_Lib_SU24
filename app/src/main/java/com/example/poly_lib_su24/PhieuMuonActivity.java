@@ -161,9 +161,9 @@ public class PhieuMuonActivity extends AppCompatActivity {
         SimpleAdapter simpleAdapter = new SimpleAdapter(
                 PhieuMuonActivity.this,
                 listHM,
-                android.R.layout.simple_list_item_1,
+                android.R.layout.simple_list_item_2,
                 new String[]{"tensach"},
-                new int[]{android.R.id.text1});
+                new int[]{android.R.id.text2});
         spnSach.setAdapter(simpleAdapter);
     }
 

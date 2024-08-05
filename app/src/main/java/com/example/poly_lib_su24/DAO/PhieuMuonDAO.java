@@ -50,7 +50,7 @@ public class PhieuMuonDAO {
         SQLiteDatabase sqLiteDatabase = dpHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         //PHIEUMUON(maphieumuon integer primary key autoincrement , giathue integer, ngaymuon text, manguoidung integer references NGUOIDUNG(manguoidung), masach integer references SACH(masach), trangthai integer
-        contentValues.put("maphieumuon", phieuMuon.getMaPhieu());
+//        contentValues.put("maphieumuon", phieuMuon.getMaPhieu());
         contentValues.put("giathue", phieuMuon.getGiathue());
         contentValues.put("ngaymuon", phieuMuon.getNgayThue());
         contentValues.put("manguoidung", phieuMuon.getMaND());
