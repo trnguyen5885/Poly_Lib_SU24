@@ -103,7 +103,7 @@ public class DpHelper extends SQLiteOpenHelper {
 
 
 //        db.execSQL("INSERT INTO CTPM VALUES (1,1,1)");
-        db.execSQL("INSERT INTO THANHVIEN VALUES (1,'Nguyễn Nhật Nam',2,'https://res.cloudinary.com/namnn512/image/upload/v1721122941/r2vedgox1ag2ohrfesez.jpg','')");
+        db.execSQL("INSERT INTO THANHVIEN VALUES (1,'Nguyễn Nhật Nam',2,'https://res.cloudinary.com/namnn512/image/upload/v1722959390/lxsxjnaw6wsd0x4g9oet.jpg','')");
     }
 
 

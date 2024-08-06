@@ -14,11 +14,11 @@
         android:layout_width="54dp"
         android:layout_height="54dp"
         android:layout_margin="5dp"
-        android:src="@drawable/kienthuc"/>
+        android:src="@drawable/avt"/>
 
     <LinearLayout
         android:layout_width="200dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:orientation="vertical">
 

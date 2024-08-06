@@ -33,7 +33,7 @@
             android:exported="false"
             android:parentActivityName=".AdminActivity" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".AdminActivity"
             android:exported="true">
 
         </activity>
@@ -54,7 +54,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminActivity"
+            android:name=".WelcomeActivity"
             android:exported="true">
 
             <intent-filter>

@@ -104,6 +104,11 @@ public class AdminActivity extends AppCompatActivity {
                         Intent intent = new Intent(AdminActivity.this, ThanhVienActivity.class);
                         startActivity(intent);
                     }
+                    else if (item.getItemId() == R.id.thongKe){
+                        Intent intent = new Intent(AdminActivity.this, ThongKeActivity.class);
+                        startActivity(intent);
+                    }
+
                 return false;
             }
         });

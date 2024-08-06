@@ -124,37 +124,44 @@ public class BooksActivity extends AppCompatActivity {
             }
         });
     }
-    public void doDuLieu(String text) {
+    public void doDuLieu(String text){
         listBooks = booksDAO.getAllBooks();
-        ArrayList<Books> filteredBooks = new ArrayList<>();
+        filteredBooks = new ArrayList<>();
+        searchBooks = new ArrayList<>();
         // Lấy thể loại từ Intent
-        int bookType = getIntent().getIntExtra("bookType", -1); // Default là -1 nếu không tìm thấy giá trị
+        int bookType = getIntent().getIntExtra("bookType", -1);// Default là -1 nếu không tìm thấy giá trị
         // Lọc sách theo thể loại
-        if (bookType != -1) {
+        if(bookType != -1) {
+            searchView.setVisibility(View.GONE);
             for (Books books : listBooks) {
                 if (books.getMaLoai() == bookType) {
                     filteredBooks.add(books);
+                    adapter = new BookAdapter(BooksActivity.this, filteredBooks);
                 }
             }
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
+            rvCustomers.setLayoutManager(linearLayoutManager);
+            rvCustomers.setAdapter(adapter);
         }
-        // Tìm kiếm
-        else if (text != null && !text.isEmpty()) {
+        // tìm kiếm
+        else if(text!=null){
             for (Books book : listBooks) {
                 if (book.getTenSach().toLowerCase().startsWith(text.toLowerCase())) {
-                    filteredBooks.add(book);
+                    searchBooks.add(book);
                 }
             }
+            adapter = new BookAdapter(BooksActivity.this, searchBooks);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
+            rvCustomers.setLayoutManager(linearLayoutManager);
+            rvCustomers.setAdapter(adapter);
         }
-        // Không lọc hoặc tìm kiếm
-        else {
-            filteredBooks = listBooks;
+        else{
+            adapter = new BookAdapter(BooksActivity.this, listBooks);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
+            rvCustomers.setLayoutManager(linearLayoutManager);
+            rvCustomers.setAdapter(adapter);
         }
 
-        // Cập nhật adapter và layout manager
-        adapter = new BookAdapter(BooksActivity.this, filteredBooks);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BooksActivity.this);
-        rvCustomers.setLayoutManager(linearLayoutManager);
-        rvCustomers.setAdapter(adapter);
     }
 
 
